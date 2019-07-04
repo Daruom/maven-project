@@ -28,13 +28,13 @@ pipeline {
 			
                 }
 
-                stage('Deploy to Staging'){
+                stage('Deploy to Production'){
                         steps {
                          echo "Deploying..."
                          timeout(time:5, unit:'DAYS'){
                                 input message:'Approve prod deployement?'
                          }
-                         build job: 'deploy-to-stagging'
+                         build job: 'deploy-to-production'
                         }
 
                         post {
@@ -48,6 +48,6 @@ pipeline {
                         }
                 }
 
-        }
-}
+
+}}
 
