@@ -1,0 +1,45 @@
+pipeline {
+	agent any
+	parameters {
+		string(name: 'tomcat_dev, defaultValue: '172.31.27.124', description: 'IQ server')
+		string(name: 'tomcat_prod, defaultValue: '172.31.43.92', description: 'PROD server')
+	}
+	triggers {
+		pollSCM('* * * * *')
+	}
+
+ stages{
+	stage('Build'){
+		steps {
+			sh 'mvn clean package'
+		}
+		post {
+			success {
+			 echo 'Now Archiving...'
+			 archiveArtifacts artifacts: '**/target/*.war'
+			}
+
+		}
+
+	}
+
+
+	stage('Deployments'){
+		parallel{
+			stage('Deploy to string'){
+				steps {
+					sh "scp -i /home/thor/Public/Jekins-projects/maven-project/tomcat-demo.pem **/target/*.war ec2-user@13.58.23.41:/var/lib/tomcat7/webapps"
+				}
+			}
+
+			stage('Deploy to Prod'){
+				steps {
+					 sh "scp -i /home/thor/Public/Jekins-projects/maven-project/tomcat-demo.pem **/target/*.war ec2-user@18.223.143.202:/var/lib/tomcat7/webapps"
+
+				}	
+			}
+		}
+	}
+ }
+
+}
