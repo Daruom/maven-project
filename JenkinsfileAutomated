@@ -29,8 +29,8 @@ pipeline {
 		parallel{
 			stage('Deploy to IQ'){
 				steps {
-					sh "ssh-keygen -t rsa -b 2048 -C ec2-user@${params.tomcat_dev}"
-					sh "ssh-copy-id ec2-user@${params.tomcat_dev}"
+
+					sh """ssh -o StrictHostKeyChecking=No ec2-user@${params.tomcat_dev}  sudo service tomcat restart"""
 					sh "scp -i /home/thor/Public/Jenkins-projects/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
 				}
 			}
