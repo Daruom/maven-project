@@ -35,13 +35,7 @@ pipeline {
 				}
 			}
 
-			/*stage('Deploy to Prod'){
-				steps {
-					 
-					 sh "scp -i /home/thor/Public/Jenkins-projects/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
 
-				}	
-			}*/
 		}
 	}
  }
