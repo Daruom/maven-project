@@ -30,7 +30,7 @@ pipeline {
 			stage('Deploy to IQ'){
 				steps {
 
-					sh "echo ''  sudo -S ./binary scp -i /home/thor/Public/Jenkins-projects/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+					sh "echo ''| sudo -S ./binary scp -i /home/thor/Public/Jenkins-projects/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
 				}
 			}
 
