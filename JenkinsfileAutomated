@@ -29,13 +29,13 @@ pipeline {
 		parallel{
 			stage('Deploy to IQ'){
 				steps {
-					sh "ssh-copy-id root@172.17.0.2"
+					sh "ssh-copy-id 172.17.0.2"
 					sh "scp **/target/*.war root@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
 				}
 			}
 		        stage('Deploy to Prod'){
                                 steps {
-					sh "ssh-copy-id root@172.17.0.3"
+					sh "ssh-copy-id 172.17.0.3"
                                         sh "scp **/target/*.war root@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
                                 }
                         }
