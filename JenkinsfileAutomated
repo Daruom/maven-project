@@ -1,8 +1,8 @@
 pipeline {
 	agent any
 	parameters {
-		string(name: 'tomcat_dev', defaultValue: '18.222.187.242', description: 'IQ server')
-		string(name: 'tomcat_prod', defaultValue: '18.219.69.27', description: 'PROD server')
+		string(name: 'tomcat_dev', defaultValue: '172.17.0.2', description: 'IQ server')
+		string(name: 'tomcat_prod', defaultValue: '172.17.0.3', description: 'PROD server')
 		string(name: 'pem_directory', defaultValue: '/home/thor/Public/Jenkins-projects/maven-project', description: 'pem direct')
 	}
 	triggers {
